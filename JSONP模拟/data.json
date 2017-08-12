@@ -1,0 +1,4 @@
+window['{{name}}'] = ({
+    "name": "nany",
+    "sex": "female"
+})

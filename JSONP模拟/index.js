@@ -13,7 +13,7 @@ var server = http.createServer(function(request, response){
   var method = request.method
 
   //从这里开始看，上面不要看
-  response.setHeader('Access-Control-Allow-Origin', 'http://nany.com')  
+  
   if(path === '/'){  // 如果用户请求的是 / 路径
     var string = fs.readFileSync('./index.html')  
     response.setHeader('Content-Type', 'text/html;charset=utf-8')  
@@ -27,17 +27,21 @@ var server = http.createServer(function(request, response){
     response.setHeader('Content-Type', 'application/javascript')
     response.end(string)
   }else if(path === '/nany'){  
+
+    
     var string = fs.readFileSync('./nany.html')
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.end(string)
   }else if(path === '/qq'){  
+     
     var string = fs.readFileSync('./qq.html')
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.end(string)
-  }else if(path === '/data.json'){  
-    var string = fs.readFileSync('./data.json')
+  }else if(path === '/data.json'){ 
+    var name = query.name 
+    var string = fs.readFileSync('./data.json','utf8')
     response.setHeader('Content-Type', 'application/json')
-    response.end(string)
+    response.end(string.replace('{{name}}',name))
   }else{  
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8') 
